@@ -1,0 +1,438 @@
+﻿<html class='htmlre1'>
+<head>
+<title>Reclami</title>
+<style>
+@font-face{font-family:'jazeera-light';src:url('jazeera-light.eot?#iefix');src:local('الجزيرة خفيف'),local('jazeera-light'),url('jazeera-light.woff') format('woff');}
+</style>
+<link rel="stylesheet" media="screen" type="text/css" href="css/style-ar.css"/>
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+
+<script>
+
+
+
+
+
+
+
+function opp(s)
+{
+window.HTMLOUT.ouv(1);
+$('#boba').removeClass("logow2");
+$('#boba').addClass("logow");
+$('#loadert').show();
+  
+setTimeout(function(){
+      $.ajax({
+   type: "GET",
+   url: s,
+   success: function(msg){
+ 
+   document.location.href=s;
+
+    e.preventDefault();
+   },
+   error: function() { 
+  $('#loadert').hide();
+  window.HTMLOUT.msgerreur();
+  }
+   
+   
+ });
+	 
+  
+}, 800);
+}
+
+
+function rek()
+{
+$('#boba').removeClass("logow");
+$('#boba').addClass("logow2");
+
+setTimeout(function(){
+ window.HTMLOUT.openmenu();
+$('#boba').removeClass("logow2");
+$('#boba').addClass("logow");
+}, 200);
+}
+
+function retour()
+{
+var r=document.URL;
+var u=document.getElementById("coucou").value;
+if ((r=='http://aldomania.net/reclamation/liste.html' || r=='http://www.aldomania.net/reclamation/liste.html' || r=='liste.html') && u=='1')
+{
+	 $("#resultataffiche").removeClass("resultataffiche2");
+					$("#resultataffiche").addClass("resultataffiche");
+					
+					setTimeout(function(){
+					$("#resultataffiche").html();
+$("#resultataffiche").hide();
+$(".panneau").fadeOut();
+document.getElementById("coucou").value='0';
+window.HTMLOUT.ouv(3);
+}, 300);
+}
+
+else
+{
+window.HTMLOUT.pageretour();
+}
+}
+
+
+function catego(k)
+{
+
+localStorage.setItem("cati", k);
+window.HTMLOUT.categorie(''+k);
+window.HTMLOUT.ouv(2);
+
+}
+
+function ouverture()
+{
+
+window.HTMLOUT.ouv(1);
+}
+
+
+
+
+	
+    $(document).ready(function() {
+
+	
+	
+window.HTMLOUT.ouv(2);	
+
+$('body').show();
+$('#loadert').show();
+setTimeout(function(){
+$('#loadert').hide();
+$('#container').show();
+}, 10);
+		
+
+var hr = new XMLHttpRequest();
+  // Create some variables we need to send to our PHP file
+  var url = "http://aldomania.net/reclamation/requete-ar.php";
+  var g=window.HTMLOUT.getmac();
+  var vars = "getnotif="+g;
+  hr.open("POST", url, true);
+  hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  // Access the onreadystatechange event for the XMLHttpRequest object
+  hr.onreadystatechange = function() {
+    if(hr.readyState == 4 && hr.status == 200) { 
+	
+               var return_data = hr.responseText;
+			   if(return_data !='0')
+			   {
+
+			   $('.affichenot').html(return_data);
+			
+			  
+			   $('.affichenot').fadeIn();
+			   }
+			   else
+			   {
+			    $('.affichenot').html();
+			   $('.affichenot').hide();
+			   }
+			   
+
+        }
+		
+     
+    }
+  
+  // Send the data to PHP now... and wait for response to update the status div
+  hr.send(vars); // Actually execute the request
+
+
+  
+  
+  //affiche message 
+  
+  var hra = new XMLHttpRequest();
+  // Create some variables we need to send to our PHP file
+  var urla = "http://aldomania.net/reclamation/requete-ar.php";
+  var ga=window.HTMLOUT.getmac();
+  if (localStorage.getItem("message") != 0)
+  {
+   var l=localStorage.getItem("message");
+   
+ localStorage.setItem("message", l);
+  }
+ else
+ {
+   localStorage.setItem("message", '0');
+ }
+  var varsa = "getmessage=ok";
+  hra.open("POST", urla, true);
+  hra.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  // Access the onreadystatechange event for the XMLHttpRequest object
+  hra.onreadystatechange = function() {
+    if(hra.readyState == 4 && hra.status == 200) { 
+	
+               var return_dataa = hra.responseText;
+			   
+			   var hu=localStorage.getItem("message");
+			   if(return_dataa !='0' && return_dataa > hu && return_dataa != hu )
+			   {
+var r=parseInt(return_dataa)-parseInt(hu);
+			   $('.affichenot2').html(r);
+			   localStorage.setItem("message2", return_dataa);
+			   $('.affichenot2').fadeIn();
+			   }
+			   
+			  else if(return_dataa =='0' || hu > return_dataa)
+			   {
+			   
+			   	    $('.affichenot2').html();
+			   $('.affichenot2').hide(); 
+			   localStorage.setItem("message2", '0');localStorage.setItem("message", '0');
+			
+			   }
+			   else
+			   {
+			    $('.affichenot2').html();
+			   $('.affichenot2').hide();
+			   }
+			   
+
+        }
+		
+     
+    }
+  
+  // Send the data to PHP now... and wait for response to update the status div
+  hra.send(varsa); // Actually execute the request
+  //document.getElementById("status").innerHTML = "processing...";
+  return false;
+  
+  
+  
+  
+  
+
+
+  $('a').click(function(e){
+  
+  
+
+  });
+  
+ 
+   	
+
+	
+    });
+	
+function opp2(s)
+{
+$('#loadert').show();
+  
+setTimeout(function(){
+      $.ajax({
+   type: "GET",
+   url: s,
+   success: function(msg){
+   
+   var hr = new XMLHttpRequest();
+  // Create some variables we need to send to our PHP file
+  var url = "http://aldomania.net/reclamation/requete-ar.php";
+  var g=window.HTMLOUT.getmac();
+  var vars = "getalert="+g;
+  hr.open("POST", url, true);
+  hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  // Access the onreadystatechange event for the XMLHttpRequest object
+  hr.onreadystatechange = function() {
+    if(hr.readyState == 4 && hr.status == 200) { 
+	
+               var return_data = hr.responseText;
+			   if(return_data == 'blok')
+			   {
+			   $('#loadert').hide();
+			   $('#bibi2').fadeIn();$('#bibi1').fadeIn();
+			   }
+			   else if(return_data == 'non')
+			   {
+			   $('#loadert').hide();
+			   $('#bibi3').fadeIn();$('#bibi1').fadeIn();
+			   }
+			   else
+			   {
+			    document.location.href=s;
+			   }
+			    }
+		
+     
+    }
+  
+  // Send the data to PHP now... and wait for response to update the status div
+  hr.send(vars); // Actually execute the request
+  //document.getElementById("status").innerHTML = "processing...";
+  return false;
+			   
+			   
+  
+
+    e.preventDefault();
+   },
+   error: function() { 
+  $('#loadert').hide();
+  
+ window.HTMLOUT.msgerreur();
+   
+   }
+   
+   
+ });
+	 
+  
+}, 800);
+}
+function opp3(s)
+{
+	$('#loadert').show();
+  localStorage.setItem('setlang', 'fr');
+   var v=localStorage.getItem("setlang");
+   window.HTMLOUT.setlangue(v);
+
+   document.location.href='index.html';
+$('#loadert').hide();
+ 
+}
+</script>
+</head>
+<body style="display:none;" >
+
+<div id="bibi1" style="display:none;position:fixed;background-color:rgba(51, 50, 50, 0.53);background:rgba(51, 50, 50, 0.53);width:100%;height:100%;z-index:350;"></div>
+<div id="bibi2" style="display:none;z-index:351;position:absolute;margin-top:48%;padding:20px;background-color:white;color:gray;font-size:16px;width:280px;left:0;right:0;margin-left:auto;margin-right:auto;border-radius:3px;box-shadow:0 0 0.5em gray;">
+لقد تم إقفال حسابك، لأنك لم تحترم قوانين البرنامج. لا يمكنك إضافة شكايات بعد الآن<br/>
+<div class="hoverbtn" onclick="$('#bibi1').fadeOut();$('#bibi2').hide();" style="float:right;margin-top:20px;padding:10px 20px;color:gray;font-size:17px;">موافق</div>
+</div>
+
+<div id="bibi3" style="display:none;z-index:351;position:absolute;margin-top:48%;padding:20px;background-color:white;color:gray;font-size:16px;width:280px;left:0;right:0;margin-left:auto;margin-right:auto;border-radius:3px;box-shadow:0 0 0.5em gray;">
+لديك الحق في ثلاث شكايات في اليوم، يمكنك إضافة شكايات أخرى غداً<br/>
+<div class="hoverbtn" onclick="$('#bibi1').fadeOut();$('#bibi3').hide();" style="float:right;margin-top:20px;padding:10px 20px;color:gray;font-size:17px;">موافق</div>
+</div>
+
+		<img id="loadert" class="loaderia" src="images/ring-alt.gif">
+
+        <div  class="wrap push">
+<div id="nav">
+<img id="boba" class="logow" onclick="rek()" src="images/logo.png">
+<img onclick="opp('liste-ar.html')" class="mn1" style="float:right;width:22px;padding:16px 12px;margin-right:8px;" src="images/ecouter.png">
+<img onclick="opp('index-ar.html')" class="mn1" style="float:right;width:22px;padding:16px 12px;"  src="images/reclam22.png">
+<div onclick="opp('notification-ar.html')" class="mn1" style="float:right;padding:16px 12px;">
+<div id="bir" class="affichenot"></div>
+<img style="width:22px;" src="images/notif.png"></div>
+
+<div onclick="opp('messageap-ar.html');localStorage.setItem('message', localStorage.getItem('message2'));" class="mn1" style="float:right;padding:16px 12px;">
+<div id="bir2" class="affichenot2"></div>
+<img style="width:22px;" src="images/message.png"></div>
+
+</div>
+
+<div id="container">
+<input type="hidden" id="coucou" value="0">
+<div class="titreh1">تقديم شكاية</div>
+
+<div onclick="catego('Enseignement');opp2('audio-ar.html')" class="menubt">
+<img class="imgbtn" src="images/book.png">
+<p class="txtp">التعليم</p>
+</div>
+
+
+
+<div onclick="catego('Emploi');opp2('audio-ar.html')" class="menubt">
+<img class="imgbtn" src="images/businessman.png">
+<p class="txtp">الشغل</p>
+</div>
+
+
+
+
+<div onclick="catego('Santé');opp2('audio-ar.html')"  class="menubt">
+<img class="imgbtn" src="images/hospital.png">
+<p class="txtp">الصحة</p>
+</div>
+
+
+
+<div onclick="catego('Médias');opp2('audio-ar.html')" class="menubt">
+<img class="imgbtn" src="images/television.png">
+<p class="txtp">الإعلام</p>
+</div>
+
+
+
+
+<div onclick="catego('Infrastructures');opp2('audio-ar.html')" class="menubt">
+<img class="imgbtn" src="./images/route.png">
+<p class="txtp">البنيات التحتية</p>
+</div>
+
+
+
+
+<div onclick="catego('Services Publics');opp2('audio-ar.html')" class="menubt">
+<img class="imgbtn" src="images/service.png">
+<p class="txtp">الخدمات العمومية</p>
+</div>
+
+
+
+<div onclick="catego('Sport');opp2('audio-ar.html')" class="menubt">
+<img class="imgbtn" src="images/football.png">
+<p class="txtp">الرياضة</p>
+</div>
+
+
+
+
+<div onclick="catego('Environement');opp2('audio-ar.html')" class="menubt">
+<img class="imgbtn" src="images/sprout.png">
+<p class="txtp">البيئة</p>
+</div>
+
+<div onclick="catego('Sécurité');opp2('audio-ar.html')" class="menubt">
+<img class="imgbtn" src="images/burglar.png">
+<p class="txtp">الأمن</p>
+</div>
+
+<div onclick="catego('Transport');opp2('audio.html')" class="menubt">
+<img class="imgbtn" src="images/transport.png"><br/>
+<p class="txtp">النقل</p>
+</div>
+
+<div onclick="catego('Art & Culture');opp2('audio.html')" class="menubt">
+<img class="imgbtn" src="images/theatre.png"><br/>
+<p class="txtp">الفن و الثقافة</p>
+</div>
+
+<div style="width:100%;float:left;">
+<div class="titreh1">خدمات أخرى</div>
+<div onclick="catego('Aidez-moi');opp2('audio-ar.html')" class="menubt">
+<img class="imgbtn" src="images/hand.png">
+<p class="txtp">طلب مساعدة</p>
+</div>
+
+<div class="menubt">
+<img onclick="catego('Idées & propositions');opp2('audio-ar.html')" class="imgbtn" src="images/ideas.png">
+<p class="txtp">أفكار واقتراحات</p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+</body>
+</html>
+
